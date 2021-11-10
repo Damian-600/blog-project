@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const FormData = require('form-data');
 
 exports.newTenant = async (req, res, next) => {
-	// Verify madatory data is not missing from the request body
+	// Verify mandatory data is not missing
 	if (
 		!req.body.tenantName ||
 		!req.body.cacLimit ||
@@ -33,7 +33,6 @@ exports.newTenant = async (req, res, next) => {
 	);
 
 	// Replace placeholder values with data from request body
-
 	const cliScript = cliTemplate.replace(
 		/(\[TENANT_NAME\])|(\[TRUNK_FQDN\])|(\[CAC_LIMIT\])/gi,
 		function (str, p1, p2, p3) {
@@ -50,7 +49,7 @@ exports.newTenant = async (req, res, next) => {
 		contentType: 'text/plain',
 	});
 
-	// Prepare headers for the request. Note passthough authentication from postman to SBC.
+	// Prepare headers for the request. Note passthrough authentication from postman to SBC.
 	const reqHeaders = {
 		Authorization: req.headers.authorization,
 		Connection: 'keep-alive',
