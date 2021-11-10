@@ -1,0 +1,29 @@
+configure voip
+sbc cac-profile new
+name [TENANT_NAME]_CAC
+activate
+cac-rule 0
+request-type invite
+limit [CAC_LIMIT]
+activate
+exit
+exit
+ip-group new  
+srd-name Shared_SRD
+name Teams_[TENANT_NAME]
+media-realm Teams
+sbc-operation-mode 0
+cac-profile [TENANT_NAME]_CAC
+proxy-set-name Teams
+ip-profile-name MSTeams
+inbound-mesg-manipulation-set 2
+outbound-mesg-manipulation-set 3
+sip-group-name [TRUNK_FQDN]
+local-host-name [TRUNK_FQDN]
+always-use-source-addr enable
+tags Trunk=[TENANT_NAME]
+classify-by-proxy-set disable
+call-setup-rules-set-id 0
+proxy-keepalive-use-ipg disable
+activate
+exit
