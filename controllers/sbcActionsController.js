@@ -13,7 +13,7 @@ exports.newTenant = async (req, res, next) => {
 	) {
 		return res.status(400).send({
 			status: 'failure',
-			message: 'Request body missing madatory data.',
+			message: 'Request body missing mandatory data.',
 		});
 	}
 
@@ -49,7 +49,7 @@ exports.newTenant = async (req, res, next) => {
 		contentType: 'text/plain',
 	});
 
-	// Prepare headers for the request. Note passthrough authentication from postman to SBC.
+	// Prepare headers for the request. Note passthrough authentication from client to SBC.
 	const reqHeaders = {
 		Authorization: req.headers.authorization,
 		Connection: 'keep-alive',
